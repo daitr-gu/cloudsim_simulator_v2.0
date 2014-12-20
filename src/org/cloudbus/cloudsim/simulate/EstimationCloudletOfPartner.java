@@ -44,7 +44,7 @@ public class EstimationCloudletOfPartner {
 			}
 		}
 		
-		double maxProcessable = reResCloudlet.getMaxProcessable();
+		long maxProcessable = reResCloudlet.getMaxProcessable();
 		
 		if (maxProcessable == resCloudlet.getCloudletLength()){
 			double k = calcPartnerKRatio(partnerId,reResCloudlet);

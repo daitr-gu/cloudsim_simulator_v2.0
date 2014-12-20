@@ -44,18 +44,18 @@ public class EstimationCloudletObserve {
 			}
 		}
 		
-		double maxProcessable = reResCloudlet.getMaxProcessable();
+		long maxProcessable = reResCloudlet.getMaxProcessable();
 		
 		// TODO check this function
-		if (maxProcessable > resCloudlet.getMaxProcessable() 
-				&& maxProcessable == resCloudlet.getCloudletLength()) {
+		if (maxProcessable > resCloudlet.getMaxProcessable()) {
+			
 			cancel_waiting_exec[0] = resCloudlet.getBestDatacenterId();
 			cancel_waiting_exec[1] = resCloudlet.getBestVmId();
 			
 			resCloudlet.setMaxProcessable(maxProcessable);
 			resCloudlet.setBestDatacenterId(datacenterID);
 			resCloudlet.setBestVmId(reResCloudlet.getBestVmId());
-		} 
+		}
 		
 		return cancel_waiting_exec;
 	}
@@ -66,7 +66,7 @@ public class EstimationCloudletObserve {
 	
 	public boolean isExecable() {
 //		return resCloudlet.getBestFinishTime() <= resCloudlet.getCloudlet().getDeadlineTime();
-		return resCloudlet.getMaxProcessable() > 0;
+		return resCloudlet.getMaxProcessable() == resCloudlet.getCloudletLength();
 	}
 
 	public int getDatacenterIdOFCurrrentExecVm() {

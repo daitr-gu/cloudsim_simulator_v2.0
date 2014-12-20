@@ -192,7 +192,7 @@ public class CustomDatacenter extends Datacenter {
 			Log.printLine("Stop for debug");
 		}
 //		double bestFinishTime = Double.MAX_VALUE;
-		double maxProcessable = 0;
+		long maxProcessable = 0;
 		Vm bestVm = null;
 		for (Vm vm: getVmList()) {
 			CloudletScheduler scheduler = vm.getCloudletScheduler();
@@ -201,7 +201,7 @@ public class CustomDatacenter extends Datacenter {
 			
 			if (estimatedResult[1] > maxProcessable) {
 				vm.getCloudletScheduler().setLastEstimated(null);
-				maxProcessable = estimatedResult[1];
+				maxProcessable = (long) estimatedResult[1];
 				bestVm = vm;
 				bestVm.getCloudletScheduler().setLastEstimated(rcl);
 			}

@@ -5,18 +5,18 @@ import org.cloudbus.cloudsim.ResCloudlet;
 
 public class CustomResCloudlet extends ResCloudlet {	
 	private int bestVmId;
-	private double maxProcessable = 0;
+	private long maxProcessable = 0;
 	private int bestDatacenterId;
 	
 	public CustomResCloudlet(Cloudlet cloudlet) {
 		super(cloudlet);
 	}
 
-	public double getMaxProcessable() {
+	public long getMaxProcessable() {
 		return maxProcessable;
 	}
 
-	public void setMaxProcessable(double maxProcessable) {
+	public void setMaxProcessable(long maxProcessable) {
 		this.maxProcessable = maxProcessable;
 	}
 

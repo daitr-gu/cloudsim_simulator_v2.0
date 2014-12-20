@@ -478,7 +478,7 @@ public class CloudletSchedulerSpaceShared extends CloudletScheduler {
 		rcl.setBestDatacenterId(est.getBestDatacenterId());
 		rcl.setBestVmId(est.getBestVmId());
 		
-		if (getCloudletExecList().isEmpty()) {
+		if (getCloudletExecList().isEmpty() || cl.getCloudletLength() <= (totalVm - usedVm)) {
 			
 //			double time = getLastEstimated().getBestFinishTime() - CloudSim.clock();
 

@@ -186,8 +186,33 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 						sendExecRequest(rcl.getBestDatacenterId(), rcl.getBestVmId(), rcl);
 						
 					} else {
-						Log.printLine(CloudSim.clock() + ":" + getName() + ": WE NEED HELP FROM PARTNER #"+observe.getResCloudlet().getCloudlet().getCloudletId());
-						sendPartnerRequest(observe.getResCloudlet().getCloudlet());
+						Log.printLine(CloudSim.clock() + ":" + getName() + ": WE NEED HELP FROM PARTNER #"
+								+ observe.getResCloudlet().getCloudlet().getCloudletId());
+						
+						CustomResCloudlet currResCloudlet = observe.getResCloudlet();
+						if (currResCloudlet.getMaxProcessable() == 0) {
+							sendPartnerRequest(observe.getResCloudlet().getCloudlet());
+						} else {
+							// create new cloudlet to ask for partner help
+							Cloudlet currCloudlet = currResCloudlet.getCloudlet();
+							long newCloudletLength = (long) (currCloudlet.getCloudletLength() - currResCloudlet.getMaxProcessable());
+							
+							currCloudlet.setCloudletLength(currResCloudlet.getMaxProcessable());
+							Cloudlet newCloudlet = new Cloudlet(currCloudlet.getCloudletId() * 10, 
+									newCloudletLength, currCloudlet.getNumberOfPes(), 
+									currCloudlet.getCloudletFileSize(), currCloudlet.getCloudletOutputSize(), 
+									currCloudlet.getUtilizationModelCpu(), currCloudlet.getUtilizationModelRam(), 
+									currCloudlet.getUtilizationModelBw(), currCloudlet.getDeadlineTime(), 
+									currCloudlet.getUserRequestTime());
+							newCloudlet.setUserId(this.getId());
+							
+							sendExecRequest(currResCloudlet.getBestDatacenterId(), currResCloudlet.getBestVmId(), currResCloudlet);
+							getCloudletList().add(newCloudlet);
+							
+							Log.printLine(CloudSim.clock() + ":" + getName() + ": REQUEST PARTNER CLOUDLET LENGTH " + newCloudlet.getCloudletLength());
+							
+							sendPartnerRequest(newCloudlet);
+						}
 					}
 
 					setEstimationStatus(STOPPED);
