@@ -42,7 +42,7 @@ public class Simulate {
 	 * if USER_ALPHA_RATIO = false alpha ratio will be set 1:1
 	 */
 	
-	public static final boolean USER_ALPHA_RATIO = false;
+	public static final boolean USER_ALPHA_RATIO = true;
 	
 	public static int cloudletLength = 100;
 	
