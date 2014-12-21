@@ -13,6 +13,8 @@ public class PartnerInfomation {
 	
 	private int partnerVm;
 	
+	private CustomDatacenterBroker broker;
+	
 	/**
 	 * L in argithorm
 	 */
@@ -45,15 +47,31 @@ public class PartnerInfomation {
 		this.kRatio = 0;
 	}
 	
-	public PartnerInfomation(int partnerId, double ratio, int partnerVm) {
+	public PartnerInfomation(int partnerId, double ratio, int partnerVm, CustomDatacenterBroker broker) {
 		super();
 		this.partnerId = partnerId;
 		this.ratio = ratio;
-		this.requested = 0;
-		this.satified = 0;
+		if (ratio == 1) {
+			this.requested = 1;
+			this.satified = 1;
+		} else {
+			this.requested = partnerVm;
+			this.satified = broker.getVmSize();
+		}
 		this.lenghtRatio = ratio;
 		this.kRatio = 0;
+		this.broker = broker;
 		this.setPartnerVm(partnerVm);
+	}
+	
+	public double numOfTaskCanSatisfy() {
+		double maxSatisfiable = (getRequested() + broker.getVmSize()) / getRatio();
+		return maxSatisfiable - getSatified();
+	}
+	
+	public double numOfTaskCanRequest() {
+		double maxRequestable =(getSatified() + broker.getVmSize()) * getRatio(); 
+		return maxRequestable - getRequested();
 	}
 
 	@Override
@@ -106,7 +124,7 @@ public class PartnerInfomation {
 		} else if (getRequested() == 0) {
 			deviation = (double) getPartnerVm() / (getSatified() + satify_lenght);
 		} else {
-			deviation = (double) (getSatified() + satify_lenght) / (this.getRequested() + request_lenght);
+			deviation = (double) (getRequested() + request_lenght) / (this.getSatified() + satify_lenght);
 		}
 		
 		return deviation;
@@ -204,6 +222,14 @@ public class PartnerInfomation {
 
 	public void setPartnerVm(int partnerVm) {
 		this.partnerVm = partnerVm;
+	}
+
+	public CustomDatacenterBroker getBroker() {
+		return broker;
+	}
+
+	public void setBroker(CustomDatacenterBroker broker) {
+		this.broker = broker;
 	}
 
 }

@@ -49,7 +49,7 @@ public class EstimationCloudletOfPartner {
 		if (maxProcessable == resCloudlet.getCloudletLength()){
 			double k = calcPartnerKRatio(partnerId,reResCloudlet);
 			Log.printLine("Cloulet :"+reResCloudlet.getCloudletId()+" K of partner#: "+partnerId + "; K: "+k);
-			if((getCurrentBestPartner().getPartnerId()  == -1) || getCurrentBestPartner().getkRatio() < k || getCurrentBestPartner().getkRatio()  == -1){
+			if((getCurrentBestPartner().getPartnerId()  == -1) || getCurrentBestPartner().getkRatio() > k || getCurrentBestPartner().getkRatio()  == -1){
 				currentBestPartner.setPartnerId(partnerId);
 				getCurrentBestPartner().setkRatio(k);
 				currentBestPartner.setRequested(reResCloudlet.getCloudlet().getCloudletLength());
