@@ -23,6 +23,7 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 	
 	// list cloudlet waiting for internal estimate
 	private List<Cloudlet> estimationList;
+	private List<ScaleObject> scaleList;
 		
 	private int estimationStatus = STOPPED;
 	private List<PartnerInfomation> partnersList = new ArrayList<PartnerInfomation>();
@@ -32,6 +33,7 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 	public CustomDatacenterBroker(String name) throws Exception {
 		super(name);
 		setEstimationList(new ArrayList<Cloudlet>());
+		setScaleList(new ArrayList<ScaleObject>());
 		setCloudletEstimateObserveMap(new HashMap<Integer, Map<Integer, EstimationCloudletObserve>>());
 		setPartnersList(new ArrayList<PartnerInfomation>());
 		setEstimateCloudletofParnerMap(new HashMap<Integer, EstimationCloudletOfPartner>());
@@ -88,6 +90,14 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 			case CloudSimTags.PARTNER_CANCEL_ESTIMATED_TASK:
 				processPartnerCloudletCancelRequest(ev);
 				break;
+				
+			case CloudSimTags.BROKER_SCALE:
+				processScale();
+				break;
+				
+			case CloudSimTags.PARTNER_SCALE:
+				processPartnerScale(ev);
+				break;
 
 			// other unknown tags are processed by this method
 			default:
@@ -110,6 +120,9 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 		if (estimationStatus == STOPPED) {
 //			setEstimationStatus(RUNNING);
 			sendNow(getId(), CloudSimTags.BROKER_ESTIMATE_NEXT_TASK);
+			if (Simulate.SCALABLE) {
+				sendNow(getId(), CloudSimTags.BROKER_SCALE);
+			}
 		}
 	}
 	
@@ -143,6 +156,53 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 							+ " DELAY " + delay);
 					send(getId(), delay, CloudSimTags.BROKER_ESTIMATE_NEXT_TASK);
 				}
+			}
+		}
+	}
+	
+	private void processScale() {
+		if (!getScaleList().isEmpty()) {
+			ScaleObject so = getScaleList().get(0);
+			double delay = so.getScaleTime() - CloudSim.clock();
+			if (delay > 0) {
+				send(getId(), delay, CloudSimTags.BROKER_SCALE);
+			} else {
+				for (Integer datacenterId: getDatacenterIdsList()) {
+					sendNow(datacenterId, CloudSimTags.DATACENTER_SCALE, so);
+				}
+				
+				if (Simulate.UPDATE_SCALE_PARTNER) {
+					for (PartnerInfomation pi: getPartnersList()) {
+						if (Simulate.USER_ALPHA_RATIO) {
+							int partnerVm = pi.getPartnerVm();
+							double ourVm = getVmSize();
+							double newRatio = partnerVm / (ourVm + so.getMips());
+							pi.setRatio(newRatio);
+							
+							sendNow(pi.getPartnerId(), CloudSimTags.PARTNER_SCALE);
+						} else {
+							// 1:1 ratio
+							pi.setPartnerVm(pi.getPartnerVm() + so.getMips());
+						}
+					}
+				}
+				getScaleList().remove(0);
+				sendNow(getId(), CloudSimTags.BROKER_SCALE);
+			}
+		}
+	}
+	
+	private void processPartnerScale(SimEvent ev) {
+		ScaleObject so = (ScaleObject) ev.getData();
+		for (PartnerInfomation pi: getPartnersList()) {
+			if (pi.getPartnerId() == ev.getSource()) {
+				int partnerVm = pi.getPartnerVm();
+				double ownVm = getVmSize();
+				double newRatio = (partnerVm + so.getMips()) / ownVm;
+				
+				pi.setRatio(newRatio);
+				pi.setPartnerVm(partnerVm + so.getMips());
+				break;
 			}
 		}
 	}
@@ -307,7 +367,7 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 	public void handlerPartnerCloudletEstimateRequest(SimEvent ev){
 		CustomResCloudlet crl = (CustomResCloudlet) ev.getData();
 		Cloudlet cl = crl.getCloudlet();
-		if (cl.getCloudletId() == 660000) {
+		if (cl.getCloudletId() == 650000 || cl.getCloudletId() == 450000) {
 			Log.printLine("BREAK");
 		}
 //		this.addCloudletToEstimationList(cl);
@@ -319,6 +379,7 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 				if (cl.getCloudletLength() > numOfSatifiableTask) {
 					crl.setMaxProcessable(0);
 					sendNow(partnerId, CloudSimTags.PARTNER_ESTIMATE_RETURN, crl);
+					setEstimationStatus(RUNNING);
 				} else {
 					this.addCloudletToEstimationList(cl);
 				}
@@ -482,6 +543,14 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 
 	public void setVmSize(double vmSize) {
 		this.vmSize = vmSize;
+	}
+
+	public List<ScaleObject> getScaleList() {
+		return scaleList;
+	}
+
+	public void setScaleList(List<ScaleObject> scaleList) {
+		this.scaleList = scaleList;
 	}
 
 }
