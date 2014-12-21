@@ -34,8 +34,8 @@ import org.json.simple.parser.JSONParser;
  */
 public class Simulate {
 	
-//	private static final String testcaseFilePath = "C:\\Users\\Kahn\\workspace\\Scheduler_Emulation\\testcases\\testcase_5.json";
-	private static final String testcaseFilePath = "/home/ngtrieuvi92/thesis/cloudsim_simulator_v2.0/testcases/testcase_5.json";
+	private static final String testcaseFilePath = "C:\\Users\\Kahn\\workspace\\Scheduler_Emulation\\testcases\\testcase_5.json";
+//	private static final String testcaseFilePath = "/home/ngtrieuvi92/thesis/cloudsim_simulator_v2.0/testcases/testcase_5.json";
 	
 	/**
 	 * if USER_ALPHA_RATIO = true; simulate will apply alpha ratio to calc, 

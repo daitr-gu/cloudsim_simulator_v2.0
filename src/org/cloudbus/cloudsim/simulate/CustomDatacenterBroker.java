@@ -307,6 +307,9 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 	public void handlerPartnerCloudletEstimateRequest(SimEvent ev){
 		CustomResCloudlet crl = (CustomResCloudlet) ev.getData();
 		Cloudlet cl = crl.getCloudlet();
+		if (cl.getCloudletId() == 660000) {
+			Log.printLine("BREAK");
+		}
 //		this.addCloudletToEstimationList(cl);
 //		Log.printLine(CloudSim.clock() + ": " + getName() + ": Received estimate  cloudlet #"+ cl.getCloudletId()+" request from Broker #" + ev.getSource());
 		int partnerId = ev.getSource();

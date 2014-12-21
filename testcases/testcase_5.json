@@ -42,34 +42,6 @@
 				"userRequestTime": 0.0,
 				"deadline": 101.0
 			},
-			{
-				"quantity": 1,
-				"long": 200,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 101.0,
-				"deadline": 201.0
-			},
-			{
-				"quantity": 1,
-				"long": 200,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 201.0,
-				"deadline": 301.0
-			},
-			{
-				"quantity": 1,
-				"long": 300,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 502.0,
-				"deadline": 602.0
-			},
-			
 		]
 	},
 	{
@@ -113,7 +85,7 @@
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 0.0,
-				"deadline": 101.5
+				"deadline": 101.0
 			},
 			{
 				"quantity": 1,
@@ -122,7 +94,7 @@
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 101.0,
-				"deadline":201.0
+				"deadline": 201.0
 			},
 			{
 				"quantity": 1,
@@ -130,36 +102,45 @@
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 202.0,
-				"deadline": 302.0
+				"userRequestTime": 201.0,
+				"deadline": 301.0
 			},
 			{
 				"quantity": 1,
-				"long": 400,
+				"long": 200,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 302.0,
-				"deadline": 402.5
+				"userRequestTime": 301.0,
+				"deadline": 401.0
 			},
 			{
 				"quantity": 1,
-				"long": 400,
+				"long": 100,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 402.0,
-				"deadline": 502.5
+				"userRequestTime": 401.0,
+				"deadline": 501.0
 			},
-				{
+			{
 				"quantity": 1,
-				"long": 400,
+				"long": 100,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 602.0,
-				"deadline": 702.5
-			}
+				"userRequestTime": 501.0,
+				"deadline": 601.0
+			},
+			{
+				"quantity": 1,
+				"long": 100,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 601.0,
+				"deadline": 701.0
+			},
 		
 		]
 	},
@@ -195,16 +176,15 @@
 				"vmm": "Xen"
 			}
 		},
-		"cloudlets": [
-		
-			{
+		"cloudlets":[
+		{
 				"quantity": 1,
 				"long": 200,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 0.0,
-				"deadline": 101.5
+				"deadline": 101.0
 			},
 			{
 				"quantity": 1,
@@ -213,7 +193,7 @@
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 101.0,
-				"deadline":201.0
+				"deadline": 201.0
 			},
 			{
 				"quantity": 1,
@@ -221,8 +201,8 @@
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 202.0,
-				"deadline": 302.0
+				"userRequestTime": 201.0,
+				"deadline": 301.0
 			},
 			{
 				"quantity": 1,
@@ -230,8 +210,8 @@
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 302.0,
-				"deadline": 402.5
+				"userRequestTime": 301.0,
+				"deadline": 401.0
 			},
 			{
 				"quantity": 1,
@@ -239,19 +219,27 @@
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 402.0,
-				"deadline": 502.5
+				"userRequestTime": 401.0,
+				"deadline": 501.0
 			},
-				{
+			{
 				"quantity": 1,
 				"long": 400,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 602.0,
-				"deadline": 702.5
-			}
-		
+				"userRequestTime": 501.0,
+				"deadline": 601.0
+			},
+			{
+				"quantity": 1,
+				"long": 400,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 601.0,
+				"deadline": 701.0
+			},
 		]
 	}
 ]

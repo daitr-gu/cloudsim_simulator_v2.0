@@ -65,7 +65,8 @@ public class PartnerInfomation {
 	}
 	
 	public double numOfTaskCanSatisfy() {
-		double maxSatisfiable = (getRequested() + broker.getVmSize()) / getRatio();
+//		double maxSatisfiable = (getRequested() + broker.getVmSize()) / getRatio();
+		double maxSatisfiable = getRequested() / getRatio() + broker.getVmSize();
 		return maxSatisfiable - getSatified();
 	}
 	
