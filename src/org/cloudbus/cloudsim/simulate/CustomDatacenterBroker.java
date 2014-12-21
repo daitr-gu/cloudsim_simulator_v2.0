@@ -127,7 +127,7 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 					setEstimationStatus(RUNNING);
 					createCloudletObserve(cloudlet);
 					
-					if (cloudlet.getCloudletId() == 44000) {
+					if (cloudlet.getCloudletId() == 22000) {
 						Log.printLine("BREAK HERE");
 					}
 					
@@ -234,6 +234,10 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 	
 	private void processPartnerCloudletExecRequest(SimEvent ev) {
 		CustomResCloudlet rcl = (CustomResCloudlet) ev.getData();
+		
+		if (rcl.getCloudletId() == 430000) {
+			Log.printLine("BREAK");
+		}
 		updatePartnerInformationByValue(ev.getSource(),0,rcl.getCloudletLength());
 		sendExecRequest(rcl.getBestDatacenterId(), rcl.getBestVmId(), rcl);
 		setEstimationStatus(STOPPED);
@@ -242,8 +246,9 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 	
 	private void processPartnerCloudletCancelRequest(SimEvent ev) {
 		int[] info = (int[]) ev.getData();
-		if (info[1] <= 1) return;
-		sendNow(info[1], CloudSimTags.DATACENTER_CANCEL_ESTIMATED_TASK, info[2]);
+		if (info[1] > 1) { 
+			sendNow(info[1], CloudSimTags.DATACENTER_CANCEL_ESTIMATED_TASK, info[2]);
+		}
 		setEstimationStatus(STOPPED);
 		sendNow(getId(), CloudSimTags.BROKER_ESTIMATE_NEXT_TASK);
 	}
@@ -273,7 +278,6 @@ public class CustomDatacenterBroker extends DatacenterBroker {
 			try {
 				cloudlet.setCloudletStatus(Cloudlet.FAILED);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			sendNow(getId(), CloudSimTags.CLOUDLET_RETURN, cloudlet);

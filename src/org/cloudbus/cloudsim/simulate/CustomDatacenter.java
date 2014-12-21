@@ -7,7 +7,6 @@ import org.cloudbus.cloudsim.CloudletScheduler;
 import org.cloudbus.cloudsim.Datacenter;
 import org.cloudbus.cloudsim.DatacenterCharacteristics;
 import org.cloudbus.cloudsim.Host;
-import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.Storage;
 import org.cloudbus.cloudsim.Vm;
 import org.cloudbus.cloudsim.VmAllocationPolicy;
@@ -188,10 +187,7 @@ public class CustomDatacenter extends Datacenter {
 //		Log.printLine(CloudSim.clock()+ " estimating task #"+cl.getCloudletId()+ "; user request time "+ cl.getUserRequestTime());		
 		// time to transfer the files
 		double fileTransferTime = predictFileTransferTime(cl.getRequiredFiles());
-		if(rcl.getCloudletId() == 200000){
-			Log.printLine("Stop for debug");
-		}
-//		double bestFinishTime = Double.MAX_VALUE;
+
 		long maxProcessable = 0;
 		Vm bestVm = null;
 		for (Vm vm: getVmList()) {
