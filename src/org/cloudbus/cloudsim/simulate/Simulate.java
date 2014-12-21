@@ -34,15 +34,15 @@ import org.json.simple.parser.JSONParser;
  */
 public class Simulate {
 	
-	private static final String testcaseFilePath = "C:\\Users\\Kahn\\workspace\\Scheduler_Emulation\\testcases\\testcase_5.json";
-//	private static final String testcaseFilePath = "/home/ngtrieuvi92/zz/scheduler_simulation/src/org/cloudbus/cloudsim/simulate/testcase_1.json";
+//	private static final String testcaseFilePath = "C:\\Users\\Kahn\\workspace\\Scheduler_Emulation\\testcases\\testcase_5.json";
+	private static final String testcaseFilePath = "/home/ngtrieuvi92/thesis/cloudsim_simulator_v2.0/testcases/testcase_5.json";
 	
 	/**
 	 * if USER_ALPHA_RATIO = true; simulate will apply alpha ratio to calc, 
 	 * if USER_ALPHA_RATIO = false alpha ratio will be set 1:1
 	 */
 	
-	public static final boolean USER_ALPHA_RATIO = true;
+	public static final boolean USER_ALPHA_RATIO = false;
 	
 	public static int cloudletLength = 100;
 	
@@ -264,8 +264,8 @@ public class Simulate {
 		Log.printLine();
 		Log.printLine("========== OUTPUT ==========");
 		Log.printLine("Cloudlet ID" + indent + "STATUS" + indent
-				+ "Data center ID" + indent + "VM ID" + indent + "Time"
-				+ indent + "Start Time" + indent + "Finish Time");
+				+ "Data center ID" + indent + indent + "VM ID" + indent  +"Time" + indent
+				 + "Lengh"+ indent + "Start Time" + indent + "Finish Time");
 
 		DecimalFormat dft = new DecimalFormat("###.##");
 		for (int i = 0; i < size; i++) {
@@ -279,7 +279,9 @@ public class Simulate {
 						+ indent + indent + indent + cloudlet.getVmId()
 						+ indent + indent
 						+ dft.format(cloudlet.getActualCPUTime()) + indent
-						+ indent + dft.format(cloudlet.getExecStartTime())
+						+ indent  
+						+ cloudlet.getCloudletLength()
+						+ indent + indent + dft.format(cloudlet.getExecStartTime())
 						+ indent + indent
 						+ dft.format(cloudlet.getFinishTime()));
 			} else if (cloudlet.getCloudletStatus() == Cloudlet.FAILED) {
