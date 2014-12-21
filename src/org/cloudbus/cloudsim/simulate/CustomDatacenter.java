@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cloudbus.cloudsim.Cloudlet;
 import org.cloudbus.cloudsim.CloudletScheduler;
+import org.cloudbus.cloudsim.CloudletSchedulerSpaceShared;
 import org.cloudbus.cloudsim.Datacenter;
 import org.cloudbus.cloudsim.DatacenterCharacteristics;
 import org.cloudbus.cloudsim.Host;
@@ -173,6 +174,10 @@ public class CustomDatacenter extends Datacenter {
 				updateCloudletProcessing();
 				processTask(ev);
 				break;
+				
+			case CloudSimTags.DATACENTER_SCALE:
+				processScale(ev);
+				break;
 
 			// other unknown tags are processed by this method
 			default:
@@ -210,6 +215,15 @@ public class CustomDatacenter extends Datacenter {
 		}
 		
 		sendNow(ev.getSource(), CloudSimTags.BROKER_ESTIMATE_RETURN, rcl);
+	}
+	
+	private void processScale(SimEvent ev) {
+		ScaleObject so = (ScaleObject) ev.getData();
+		for (Vm vm: getVmList()) {
+			vm.setMips(vm.getMips() + so.getMips());
+			CloudletSchedulerSpaceShared scheduler = (CloudletSchedulerSpaceShared) vm.getCloudletScheduler();
+			scheduler.setTotalVm(scheduler.getTotalVm() + so.getMips());
+		}
 	}
 	
 	private void cancelEstimateTask(SimEvent ev) {

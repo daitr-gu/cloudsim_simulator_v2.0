@@ -52,8 +52,8 @@ public class PartnerInfomation {
 		this.partnerId = partnerId;
 		this.ratio = ratio;
 		if (ratio == 1) {
-			this.requested = 1;
-			this.satified = 1;
+			this.requested = 100;
+			this.satified = 100;
 		} else {
 			this.requested = partnerVm;
 			this.satified = broker.getVmSize();
@@ -231,6 +231,10 @@ public class PartnerInfomation {
 
 	public void setBroker(CustomDatacenterBroker broker) {
 		this.broker = broker;
+	}
+	
+	public boolean isBalance() {
+		return (getLenghtRatio() - getRatio()) == 0;
 	}
 
 }
