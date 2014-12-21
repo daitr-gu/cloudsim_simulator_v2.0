@@ -23,7 +23,7 @@
 			},
 			"vms": {
 				"quantity": 1,
-				"mips": 200,
+				"mips": 100,
 				"size": 1000,
 				"ram": 1024,
 				"bw": 10,
@@ -35,7 +35,7 @@
 		[
 			{
 				"quantity": 1,
-				"long": 400,
+				"long": 200,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
@@ -44,7 +44,7 @@
 			},
 			{
 				"quantity": 1,
-				"long": 400,
+				"long": 200,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
@@ -53,7 +53,7 @@
 			},
 			{
 				"quantity": 1,
-				"long": 400,
+				"long": 100,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
@@ -62,14 +62,13 @@
 			},
 			{
 				"quantity": 1,
-				"long": 400,
+				"long": 100,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 402.0,
-				"deadline": 502.0
+				"userRequestTime": 502.0,
+				"deadline": 602.0
 			},
-			
 			
 		]
 	},
@@ -106,6 +105,7 @@
 			}
 		},
 		"cloudlets": [
+		
 			{
 				"quantity": 1,
 				"long": 200,
@@ -113,7 +113,7 @@
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 0.0,
-				"deadline": 101.0
+				"deadline": 101.5
 			},
 			{
 				"quantity": 1,
@@ -122,35 +122,44 @@
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 101.0,
-				"deadline": 201.0
+				"deadline":201.0
 			},
 			{
 				"quantity": 1,
-				"long": 200,
+				"long": 400,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 201.0,
-				"deadline": 301.0
+				"userRequestTime": 202.0,
+				"deadline": 302.0
 			},
 			{
 				"quantity": 1,
-				"long": 300,
+				"long": 400,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 302.0,
+				"deadline": 402.5
+			},
+			{
+				"quantity": 1,
+				"long": 400,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
 				"userRequestTime": 402.0,
-				"deadline": 502.0
+				"deadline": 502.5
 			},
-			{
+				{
 				"quantity": 1,
-				"long": 300,
+				"long": 400,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 502.0,
-				"deadline": 602.0
-			},
+				"userRequestTime": 602.0,
+				"deadline": 702.5
+			}
 		
 		]
 	},
@@ -178,7 +187,7 @@
 			},
 			"vms": {
 				"quantity": 1,
-				"mips": 400,
+				"mips": 300,
 				"size": 1000,
 				"ram": 1024,
 				"bw": 10,
@@ -190,49 +199,59 @@
 		
 			{
 				"quantity": 1,
-				"long": 300,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 0.0,
-				"deadline": 101.0
-			},
-			{
-				"quantity": 1,
-				"long": 300,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 101.0,
-				"deadline": 201.0
-			},
-			{
-				"quantity": 1,
-				"long": 200,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 201.0,
-				"deadline": 301.0
-			},
-			{
-				"quantity": 1,
-				"long": 200,
-				"fileSize": 300,
-				"outputSize": 300,
-				"pesNumber": 1,
-				"userRequestTime": 402.0,
-				"deadline": 502.0
-			},
-			{
-				"quantity": 1,
 				"long": 500,
 				"fileSize": 300,
 				"outputSize": 300,
 				"pesNumber": 1,
-				"userRequestTime": 502.0,
-				"deadline": 602.0
+				"userRequestTime": 0.0,
+				"deadline": 101.5
 			},
+			{
+				"quantity": 1,
+				"long": 200,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 101.0,
+				"deadline":201.0
+			},
+			{
+				"quantity": 1,
+				"long": 200,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 202.0,
+				"deadline": 302.0
+			},
+			{
+				"quantity": 1,
+				"long": 400,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 302.0,
+				"deadline": 402.5
+			},
+			{
+				"quantity": 1,
+				"long": 400,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 402.0,
+				"deadline": 502.5
+			},
+				{
+				"quantity": 1,
+				"long": 400,
+				"fileSize": 300,
+				"outputSize": 300,
+				"pesNumber": 1,
+				"userRequestTime": 602.0,
+				"deadline": 702.5
+			}
+		
 		]
 	}
 ]

@@ -43,6 +43,8 @@ public class Simulate {
 	 */
 	
 	public static final boolean USER_ALPHA_RATIO = true;
+	public static final boolean SCALABLE = false;
+	public static final boolean UPDATE_SCALE_PARTNER = false;
 	
 	public static int cloudletLength = 100;
 	
@@ -116,6 +118,18 @@ public class Simulate {
 	            		cloudlet.setUserId(broker.getId());
 	            		cloudletList.add(cloudlet);
 	            	}
+            	}
+            	
+            	JSONArray scaleArr = (JSONArray) member.get("scale");
+            	if (scaleArr != null) {
+            		for (int j = 0; j < scaleArr.size(); j++) {
+            			JSONObject m_scale = (JSONObject) scaleArr.get(j);
+            			int mips = ((Long) m_scale.get("mips")).intValue();
+            			double scaleTime = (Double) m_scale.get("scaleTime");
+            			
+            			ScaleObject so = new ScaleObject(mips, scaleTime);
+            			broker.getScaleList().add(so);
+            		}
             	}
 
             	broker.submitCloudletList(cloudletList);
@@ -335,6 +349,7 @@ public class Simulate {
 			PartnerInfomation pInfo = partnerInfo.get(i);
 //			Log.printLine(pInfo.getPartnerId()+":"+pInfo.getkRatio());
 			totalKRatio += pInfo.getkRatio();
+			Log.printLine(pInfo.getRequested() + " / " + pInfo.getSatified());
 		}
 		
 		Log.printLine(name+ indent + totalCloudlet + indent  + indent + successCloudlet + indent + indent +  dft.format((double)successCloudlet / totalCloudlet * 100) + "%"

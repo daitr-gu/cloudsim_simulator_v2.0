@@ -287,6 +287,12 @@ public class CloudSimTags {
 	public static final int PARTNER_CANCEL_ESTIMATED_TASK = BASE + 57;
 	
 	public static final int PARTNER_EXEC = BASE + 58;
+	
+	public static final int BROKER_SCALE = BASE + 59;
+	
+	public static final int DATACENTER_SCALE = BASE + 60;
+	
+	public static final int PARTNER_SCALE = BASE + 61;
 
 	/** Private Constructor */
 	private CloudSimTags() {
