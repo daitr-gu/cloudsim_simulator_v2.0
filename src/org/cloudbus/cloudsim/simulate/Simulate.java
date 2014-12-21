@@ -34,8 +34,8 @@ import org.json.simple.parser.JSONParser;
  */
 public class Simulate {
 	
-	private static final String testcaseFilePath = "C:\\Users\\Kahn\\workspace\\Scheduler_Emulation\\testcases\\testcase_5.json";
-//	private static final String testcaseFilePath = "/home/ngtrieuvi92/thesis/cloudsim_simulator_v2.0/testcases/testcase_5.json";
+//	private static final String testcaseFilePath = "C:\\Users\\Kahn\\workspace\\Scheduler_Emulation\\testcases\\testcase_5.json";
+	private static final String testcaseFilePath = "/home/ngtrieuvi92/thesis/cloudsim_simulator_v2.0/testcases/testcase_5.json";
 	
 	/**
 	 * if USER_ALPHA_RATIO = true; simulate will apply alpha ratio to calc, 
@@ -135,7 +135,9 @@ public class Simulate {
 				List<Cloudlet> newList = broker.getCloudletList();
 				List<PartnerInfomation> partnerInfo = cusBroker.getPartnersList();
 				printResult(newList, partnerInfo, cusBroker.getName());
+				
 			}
+			printTestCaseResult();
 				
 			Log.printLine("CloudSimExample1 finished!");
 		} catch (Exception e) {
@@ -338,4 +340,47 @@ public class Simulate {
 		Log.printLine(name+ indent + totalCloudlet + indent  + indent + successCloudlet + indent + indent +  dft.format((double)successCloudlet / totalCloudlet * 100) + "%"
 				+ indent + indent + dft.format(totalKRatio / totalPartner * 100) + "%");
 	}
+	
+	private static void printTestCaseResult() {
+		String indent = "    ";
+		Log.printLine();
+		Log.printLine("========== TESTCASE RESULT ==========");
+		Log.printLine("Total" + indent  + "Success" + indent
+				+ "%_success" + indent + "K" + indent);
+		Log.printLine();
+		DecimalFormat dft = new DecimalFormat("###.##");
+		
+		int total_cloudlet = 0;
+		int total_partner = 0;
+		double total_partner_k_ratio = 0;
+		int total_lenght = 0;
+		int total_cloulet_success = 0;
+		int total_cloulet_lengh_success = 0;
+		for (DatacenterBroker broker : brokersList) {
+			CustomDatacenterBroker cusBroker = (CustomDatacenterBroker) broker;
+			List<Cloudlet> newList = broker.getCloudletList();
+			total_cloudlet += newList.size();
+			
+			for (int i = 0; i < newList.size(); i++) {
+				Cloudlet cloudlet = newList.get(i);
+				total_lenght += cloudlet.getCloudletLength(); 
+				if (cloudlet.getCloudletStatus() == Cloudlet.SUCCESS) {
+					total_cloulet_success++;
+					total_cloulet_lengh_success += cloudlet.getCloudletLength();
+				}
+			}
+			
+			List<PartnerInfomation> partnerInfo = cusBroker.getPartnersList();
+			total_partner +=partnerInfo.size();
+			for (int i = 0; i < partnerInfo.size(); i++) {
+				PartnerInfomation pInfo = partnerInfo.get(i);
+//				Log.printLine(pInfo.getPartnerId()+":"+pInfo.getkRatio());
+				total_partner_k_ratio += Math.abs(pInfo.getkRatio());
+			}
+		}
+		
+		Log.printLine(total_lenght + indent  + indent + total_cloulet_lengh_success + indent + indent +  dft.format((double)total_cloulet_lengh_success / total_lenght * 100) + "%"
+				+ indent + indent + dft.format(total_partner_k_ratio / total_partner * 100) + "%");
+	}
 }
+
